@@ -20,6 +20,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const firebase = getAnalytics(app);
 
-console.log(import.meta.env.VITE_FIREBASE_PROJECT_ID);
-
 export default firebase;
