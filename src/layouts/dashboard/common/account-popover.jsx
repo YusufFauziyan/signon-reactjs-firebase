@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { getAuth, signOut } from 'firebase/auth';
 
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
@@ -32,6 +33,7 @@ const MENU_OPTIONS = [
 
 export default function AccountPopover() {
   const router = useRouter();
+  const auth = getAuth();
 
   const user = JSON.parse(localStorage.getItem('user'));
 
@@ -46,9 +48,15 @@ export default function AccountPopover() {
   };
 
   const handleLogout = () => {
-    setOpen(null);
-    localStorage.removeItem('user');
-    router.push('/signin');
+    signOut(auth)
+      .then(() => {
+        setOpen(null);
+        localStorage.removeItem('user');
+        router.push('/signin');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

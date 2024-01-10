@@ -23,7 +23,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 
 import { useRouter } from 'src/routes/hooks';
 
-import 'src/firebase/clientApp';
 import { bgGradient } from 'src/theme/css';
 
 import Iconify from 'src/components/iconify';
@@ -37,14 +36,16 @@ export default function LoginView() {
   const auth = getAuth();
   const router = useRouter();
 
+  // provider
   const providerGithub = new GithubAuthProvider();
   providerGithub.addScope('repo');
-
   const providerGoogle = new GoogleAuthProvider();
   providerGoogle.addScope('https://www.googleapis.com/auth/contacts.readonly');
 
+  // state
   const [showPassword, setShowPassword] = useState(false);
 
+  // handle
   const handleLogin = async (e) => {
     e.preventDefault();
     const { email, password } = e.target;
@@ -113,7 +114,7 @@ export default function LoginView() {
       </Stack>
 
       <Stack direction="row" alignItems="center" justifyContent="flex-end" sx={{ my: 3 }}>
-        <Link variant="subtitle2" underline="hover">
+        <Link variant="subtitle2" underline="hover" href="/forgot-password">
           Forgot password?
         </Link>
       </Stack>
@@ -154,7 +155,15 @@ export default function LoginView() {
 
           <Typography variant="body2" sx={{ mt: 2, mb: 5 }}>
             Don’t have an account?
-            <Link variant="subtitle2" sx={{ ml: 0.5 }}>
+            <Link
+              variant="subtitle2"
+              sx={{ ml: 0.5 }}
+              href="/signup"
+              // onClick={() => router.push('/signup')}
+              style={{
+                cursor: 'pointer',
+              }}
+            >
               Get started
             </Link>
           </Typography>

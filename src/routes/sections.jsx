@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Outlet, Navigate, useRoutes } from 'react-router-dom';
 
+import 'src/firebase/clientApp';
 import DashboardLayout from 'src/layouts/dashboard';
 
 export const IndexPage = lazy(() => import('src/pages/dashboard/app'));
@@ -8,6 +9,7 @@ export const BlogPage = lazy(() => import('src/pages/dashboard/blog'));
 export const UserPage = lazy(() => import('src/pages/dashboard/user'));
 export const LoginPage = lazy(() => import('src/pages/login'));
 export const RegisterPage = lazy(() => import('src/pages/register'));
+export const ForgotPasswordPage = lazy(() => import('src/pages/forgotPassword'));
 export const ProductsPage = lazy(() => import('src/pages/dashboard/products'));
 export const Page404 = lazy(() => import('src/pages/dashboard/page-not-found'));
 
@@ -41,6 +43,10 @@ export default function Router() {
     {
       path: 'signup',
       element: !checkAuth() ? <RegisterPage /> : <Navigate to="/" replace />,
+    },
+    {
+      path: 'forgot-password',
+      element: !checkAuth() ? <ForgotPasswordPage /> : <Navigate to="/" replace />,
     },
     {
       path: '404',
