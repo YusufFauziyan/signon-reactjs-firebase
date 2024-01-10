@@ -119,7 +119,7 @@ export default function LoginView() {
         </Link>
       </Stack>
 
-      <LoadingButton fullWidth size="large" type="submit" variant="contained" color="inherit">
+      <LoadingButton fullWidth size="large" type="submit" variant="contained" color="info">
         Login
       </LoadingButton>
     </form>
